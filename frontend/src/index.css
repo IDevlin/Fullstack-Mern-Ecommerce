@@ -1,0 +1,13 @@
+body {
+    margin: 0;
+}
+
+header {
+    background-color: darkgray;
+    padding: 1rem;
+}
+header a {
+    color: #ffffff;
+    font-weight: bold;
+    text-decoration: none;
+}
