@@ -1,28 +1,59 @@
+//import React, { useState } from 'react';
 import React from 'react';
-import { Link } from 'react-router-dom';
-import data from '../data';
+import { useReducer, useEffect } from 'react';
+import axios from 'axios';
+import logger from 'use-reducer-logger';
+import Product from '../components/Product';
+//import data from '../data';
+
+const reducer = (state, action) => {
+  switch (action.type) {
+    case 'FETCH_REQUEST':
+      return { ...state, loading: true };
+    case 'FETCH_SUCCESS':
+      return { ...state, products: action.payload, loading: false };
+    case 'FETCH_FAIL':
+      return { ...state, loading: false, error: action.payload };
+    default:
+      return state;
+  }
+};
 
 const HomeScreen = () => {
+  const [{ loading, error, products }, dispatch] = useReducer(logger(reducer), {
+    products: [],
+    loading: true,
+    error: '',
+  });
+
+  // const [products, setProducts] = useState([]);
+  useEffect(() => {
+    const fetchData = async () => {
+      dispatch({ type: 'FETCH_REQUEST' });
+      try {
+        const result = await axios.get('/api/products');
+        dispatch({ type: 'FETCH_SUCCESS', payload: result.data });
+        //setProducts(result);
+      } catch (err) {
+        dispatch({ type: 'FETCH_FAIL', payload: err.message });
+      }
+    };
+    fetchData();
+  }, []);
+
   return (
     <div>
       <h1>Productos Destacados</h1>
       <div className="products">
-        {data.products.map((product, index) => (
-          <div className="product" key={product.slug}>
-            <Link to={`product/${product.slug}`}>
-              <img src={product.image} alt={product.name} />
-            </Link>
-            <div className="product-info">
-              <Link to={`product/${product.slug}`}>
-                <p>{product.name}</p>
-              </Link>
-              <p>
-                <strong>Precio: ${product.price}</strong>
-              </p>
-              <button>Agregar al Carrito</button>
-            </div>
-          </div>
-        ))}
+        {loading ? (
+          <div>Loading...</div>
+        ) : error ? (
+          <div>{error}</div>
+        ) : (
+          products.map((product, index) => (
+            <Product key={product.slug} product={product}></Product>
+          ))
+        )}
       </div>
     </div>
   );

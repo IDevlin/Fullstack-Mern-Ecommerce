@@ -1,14 +1,9 @@
 
-header {
-    background-color: darkgray;
-    padding: 1rem;
-}
-header a {
-    color: #ffffff;
-    font-weight: bold;
-    text-decoration: none;
+.site-container {
+  min-height: 100vh;
 }
 main {
+  flex: 1;
    padding: 1rem; 
 }
 .products {
@@ -27,4 +22,13 @@ main {
 }
 .product-info {
   padding: 1rem;  
+}
+.rating span {
+  color: #ffc000;
+}
+.rating #review-title {
+  color: black;
+}
+.img-large {
+  max-width: 100%;
 }

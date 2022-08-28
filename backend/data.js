@@ -40,7 +40,7 @@ const data = {
             name: 'Puma Fit Pant',
             slug: 'puma-slim-pant',
             category: 'Pants',
-            image: '/images/p4.jpg',
+            image: '/images/p5.jpg',
             price: 35,
             countInStock: 5,
             brand: 'Puma',
