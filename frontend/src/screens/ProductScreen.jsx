@@ -12,9 +12,8 @@ import Rating from '../components/Rating';
 import { Helmet } from 'react-helmet-async';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
-import {getError} from '../utils.js';
-import Store from '../Store';
-
+import { getError } from '../utils.js';
+import { StoreContext } from '../Store';
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -31,7 +30,7 @@ const reducer = (state, action) => {
 
 const ProductScreen = () => {
   const params = useParams();
-  const {slug} = params;
+  const { slug } = params;
 
   const [{ loading, error, product }, dispatch] = useReducer(reducer, {
     product: [],
@@ -53,66 +52,84 @@ const ProductScreen = () => {
     fetchData();
   }, [slug]);
 
-  const {state, dispatch: ctxDispatch} = useContext(Store)
-  const addToCartHandler = () => {
-    ctxDispatch({type: 'CART_ADD_ITEM', payload:{...product, quantity: 1}})
-  }
+  const { state, dispatch: ctxDispatch } = useContext(StoreContext);
+  const { cart } = state;
+  const addToCartHandler = async () => {
+    const existItem = cart.cartItems.find((x) => x._id === product._id);
+    const quantity = existItem ? existItem.quantity + 1 : 1;
+    const { data } = await axios.get(`/api/products/${product._id}`);
+    if (data.countInStock < quantity) {
+      window.alert('Sorry. Product is out of stock');
+      return;
+    }
+    ctxDispatch({
+      type: 'CART_ADD_ITEM',
+      payload: { ...product, quantity: 1 },
+    });
+  };
 
-  return ( loading ? 
-    <LoadingBox/>
-   : error ? 
+  return loading ? (
+    <LoadingBox />
+  ) : error ? (
     <MessageBox variant={'danger'}>{error}</MessageBox>
-   : 
+  ) : (
     <div>
       <Row>
         <Col md={6}>
-          <img className='img-large'
-          src={product.image} alt={product.name}/>
+          <img className="img-large" src={product.image} alt={product.name} />
         </Col>
         <Col md={3}>
-          <ListGroup variant='flush'>
-             <ListGroup.Item>
+          <ListGroup variant="flush">
+            <ListGroup.Item>
               <Helmet>
-              <title>Shop: {product.name}</title>
+                <title>Shop: {product.name}</title>
               </Helmet>
-             </ListGroup.Item>
-             <Rating  rating={product.rating} numReviews={product.numReviews}>
-             </Rating>
-             <ListGroup.Item>
-              Descripción: 
+            </ListGroup.Item>
+            <Rating
+              rating={product.rating}
+              numReviews={product.numReviews}
+            ></Rating>
+            <ListGroup.Item>
+              Descripción:
               <p>{product.description}</p>
-             </ListGroup.Item>
+            </ListGroup.Item>
           </ListGroup>
-       </Col>
+        </Col>
         <Col md={3}>
-        <Card className='mt-2'>
-          <Card.Body>
-            <ListGroup variant='flush'>
-                 <ListGroup.Item>
+          <Card className="mt-2">
+            <Card.Body>
+              <ListGroup variant="flush">
+                <ListGroup.Item>
                   <Row>
                     <Col>Precio:</Col>
                     <Col>Precio: ${product.price}</Col>
                   </Row>
-                 </ListGroup.Item>
-                 <ListGroup.Item >
+                </ListGroup.Item>
+                <ListGroup.Item>
                   <Row>
                     <Col>Status:</Col>
-                    <Col> {product.countInStock > 0? 
-                    <Badge bg='success'>Success</Badge> : <Badge bg='danger'>Agotado</Badge>}</Col>
+                    <Col>
+                      {' '}
+                      {product.countInStock > 0 ? (
+                        <Badge bg="success">Success</Badge>
+                      ) : (
+                        <Badge bg="danger">Agotado</Badge>
+                      )}
+                    </Col>
                   </Row>
-                 </ListGroup.Item>
-                 {product.countInStock > 0 && (
+                </ListGroup.Item>
+                {product.countInStock > 0 && (
                   <ListGroup.Item>
-                    <div className='d-grid'>
-                      <Button onClick={addToCartHandler} variant='primary'>
+                    <div className="d-grid">
+                      <Button onClick={addToCartHandler} variant="primary">
                         Add to Cart
                       </Button>
                     </div>
                   </ListGroup.Item>
-                 )}
-            </ListGroup>
-          </Card.Body>
-        </Card>
+                )}
+              </ListGroup>
+            </Card.Body>
+          </Card>
         </Col>
       </Row>
     </div>

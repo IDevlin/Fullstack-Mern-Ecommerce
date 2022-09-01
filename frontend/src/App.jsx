@@ -1,6 +1,6 @@
-import Store from './Store';
+import  { StoreContext } from './Store';
 import Nav from 'react-bootstrap/Nav'
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 import Navbar from 'react-bootstrap/Navbar';
 import HomeScreen from './screens/HomeScreen';
 import Badge from 'react-bootstrap/esm/Badge';
@@ -11,7 +11,7 @@ import { BrowserRouter, Link, Route, Routes } from 'react-router-dom';
 
 
 function App() {
-  const {state} = useContext(Store)
+  const {state} = useContext(StoreContext)
   const {cart}= state
   console.log(cart.cartItems)
   return (
@@ -29,7 +29,7 @@ function App() {
                   {
                     cart.cartItems.length > 0 && (
                       <Badge pill bg='danger'>
-                        {cart.cartItems.length}
+                        {cart.cartItems.length.reduce((acc, curr)=> acc + curr.quantity, 0)}
                       </Badge>
                     )
                   }
