@@ -8,12 +8,13 @@ import Container from 'react-bootstrap/Container';
 import ProductScreen from './screens/ProductScreen';
 import { LinkContainer } from 'react-router-bootstrap';
 import { BrowserRouter, Link, Route, Routes } from 'react-router-dom';
+import CartScreen from './screens/CartScreen';
 
 
 function App() {
   const {state} = useContext(StoreContext)
   const {cart}= state
-  console.log(cart.cartItems)
+
   return (
     <BrowserRouter>
       <div className='d-flex flex-column site-container'>
@@ -29,7 +30,7 @@ function App() {
                   {
                     cart.cartItems.length > 0 && (
                       <Badge pill bg='danger'>
-                        {cart.cartItems.length.reduce((acc, curr)=> acc + curr.quantity, 0)}
+                        {cart.cartItems.reduce((acc, curr)=> acc + curr.quantity, 0)}
                       </Badge>
                     )
                   }
@@ -43,6 +44,7 @@ function App() {
           
           <Routes>
             <Route path="/product/:slug" element={<ProductScreen />} />
+            <Route path="/cart" element={<CartScreen />} />
             <Route path="/" element={<HomeScreen />} />
           </Routes>
          

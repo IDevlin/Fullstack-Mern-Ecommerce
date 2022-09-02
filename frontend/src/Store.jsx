@@ -20,7 +20,7 @@ const reducer = (state, action) => {
             item._id === existItem._id ? newItem : item
           )
         : [...state.cart.cartItems, newItem];
-        return {...state, cart: {...state.cart, cartItems}}
+      return { ...state, cart: { ...state.cart, cartItems } };
       
     default:
       return state;
