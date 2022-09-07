@@ -31,7 +31,7 @@ const reducer = (state, action) => {
 const ProductScreen = () => {
  const navigate = useNavigate()
   const params = useParams();
-  const { slug, _id } = params;
+  const { slug } = params;
 
   const [{ loading, error, product }, dispatch] = useReducer(reducer, {
     product: [],

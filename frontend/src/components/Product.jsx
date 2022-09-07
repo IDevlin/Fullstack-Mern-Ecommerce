@@ -1,9 +1,35 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import Button from 'react-bootstrap/esm/Button';
+import { Link, useNavigate } from 'react-router-dom';
 import Rating from './Rating';
+import { useContext } from 'react';
+import axios from 'axios';
+import {StoreContext} from '../Store';
 
 const Product = (props) => {
+  const navigate = useNavigate()
   const { product } = props;
+
+  const { state, dispatch: ctxDispatch } = useContext(StoreContext);
+  const {
+    cart: { cartItems },
+  } = state;
+
+  const addToCartHandler = async () => {
+    const existItem = cartItems.find((x) => x._id === product._id);
+    const quantity = existItem ? existItem.quantity + 1 : 1;
+    const { data } = await axios.get(`/api/products/id/${product._id}`);
+    if (data.countInStock < quantity) {
+      window.alert('Sorry. Product is out of stock');
+      return;
+  }
+  ctxDispatch({
+    type: 'CART_ADD_ITEM',
+    payload: { ...product, quantity },
+  });
+  navigate('/cart')
+};
+
   return (
     <div className="product">
       <Link to={`product/${product.slug}`}>
@@ -17,7 +43,8 @@ const Product = (props) => {
         <p>
           <strong>Precio: ${product.price}</strong>
         </p>
-        <button>Agregar al Carrito</button>
+       {product.countInStock == 0 ? <Button variant='light' disabled>Sin Stock</Button>:<Button onClick={()=> addToCartHandler()}>Agregar al Carrito</Button> } 
+      
       </div>
     </div>
   );
