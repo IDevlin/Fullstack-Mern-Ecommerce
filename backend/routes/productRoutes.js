@@ -9,7 +9,7 @@ productRouter.get('/', async (req, res) => {
   res.send(products);
 });
 
-productRouter.get('/:slug', async (req, res) => {
+productRouter.get('/slug/:slug', async (req, res) => {
   const product = await Product.findOne({ slug: req.params.slug });
   if (product) {
     res.send(product);
@@ -18,7 +18,7 @@ productRouter.get('/:slug', async (req, res) => {
   }
 });
 
-productRouter.get('id/:id', async (req, res) => {
+productRouter.get('/id/:id', async (req, res) => {
   const product = await Product.findById(req.params.id);
   if (product) {
     res.send(product);
