@@ -13,11 +13,12 @@ import SigninScreen from './screens/SigninScreen';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'
+import ShippingAddressScreen from './screens/ShippingAddressScreen';
 
 function App() {
   const { state, dispatch } = useContext(StoreContext);
   const { cart, userInfo } = state;
-  console.log(userInfo);
+  
 
   const signoutHandler = () => {
     dispatch({ type: 'USER_SIGNOUT' });
@@ -78,6 +79,7 @@ function App() {
             <Route path="/product/:slug" element={<ProductScreen />} />
             <Route path="/cart" element={<CartScreen />} />
             <Route path="/signin" element={<SigninScreen />} />
+            <Route path="/shipping" element={<ShippingAddressScreen />} />
             <Route path="/" element={<HomeScreen />} />
           </Routes>
         </main>

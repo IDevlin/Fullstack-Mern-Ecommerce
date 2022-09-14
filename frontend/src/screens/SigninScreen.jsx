@@ -14,7 +14,7 @@ import { getError } from '../utils';
 export default function SigninScreen() {
   const navigate = useNavigate();
   const { search } = useLocation();
-  const redirectInUrl = new URLSearchParams(search).get('redirect');
+  const redirectInUrl = new URLSearchParams(search).get('redirect')
   const redirect = redirectInUrl ? redirectInUrl : '/';
 
   const [email, setEmail] = useState('');
