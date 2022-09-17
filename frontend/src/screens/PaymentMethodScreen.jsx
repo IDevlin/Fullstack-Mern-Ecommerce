@@ -13,7 +13,7 @@ const PaymentMethodScreen = () => {
   const {
     cart: { shippingAddress, paymentMethod },
   } = state;
-  
+
   const [paymentMethodName, setPaymentMethod] = useState(paymentMethod || 'PayPal');
 
   useEffect(() => {

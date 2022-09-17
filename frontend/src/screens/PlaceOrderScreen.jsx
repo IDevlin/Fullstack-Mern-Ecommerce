@@ -39,7 +39,7 @@ const PlaceOrderScreen = () => {
 
   const { state, dispatch: ctxDispatch } = useContext(StoreContext);
   const { cart, userInfo } = state;
-  console.log(cart);
+  console.log(state)
 
   const round2 = (num) => Math.round(num * 100 + Number.EPSILON) / 100; //123.2345 => 123.23
 
@@ -50,7 +50,7 @@ const PlaceOrderScreen = () => {
   cart.shippingPrice = cart.itemsPrice > 100 ? round2(0) : round2(10);
   cart.taxPrice = round2(0.15 * cart.itemsPrice);
   cart.totalPrice = cart.itemsPrice + cart.shippingPrice + cart.taxPrice;
-  console.log(cart);
+
 
   const placeOrderHandler = async () => {
     try {
