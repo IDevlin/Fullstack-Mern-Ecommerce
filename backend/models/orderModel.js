@@ -17,13 +17,13 @@ const orderSchema = new mongoose.Schema(
       },
     ],
     shippingAddress: {
-      fullName: { type: String, required: true },
-      address: { type: String, required: true },
-      city: { type: String, required: true },
-      postalCode: { type: String, required: true },
-      country: { type: String, required: true },
+      fullName: { type: String, required: false },
+      address: { type: String, required: false },
+      city: { type: String, required: false },
+      postalCode: { type: String, required: false },
+      country: { type: String, required: false },
     },
-    paymentMethod: { type: String, requiered: true },
+    paymentMethod: { type: String, required: true },
     paymentResult: {
       id: String,
       status: String,
@@ -31,16 +31,18 @@ const orderSchema = new mongoose.Schema(
       email_address: String,
     },
     itemsPrice: { type: Number, required: true },
-    shippingPrice: { type: Number, required: true },
+    shippingPrice: { type: Number, required: false },
     taxPrice: { type: Number, required: true },
     totalPrice: { type: Number, required: true },
     user: { type: mongoose.Schema.Types.ObjectId, ref: 'user', required: true },
-    isPaid: {type: Boolean, default: false},
-    paidAt: {type: Date},
-    isDelivered: {type: Boolean, default: false},
-    deliveredAt: {type: Date}
+    isPaid: { type: Boolean, default: false },
+    paidAt: { type: Date },
+    isDelivered: { type: Boolean, default: false },
+    deliveredAt: { type: Date },
   },
-  { timestamps: true }
+  {
+    timestamps: true,
+  }
 );
 
 const Order = mongoose.model('order', orderSchema);

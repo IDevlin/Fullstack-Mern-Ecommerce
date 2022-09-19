@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Link, Navigate, useNavigate } from 'react-router-dom';
 import CheckoutSteps from '../components/CheckoutSteps';
@@ -8,7 +8,6 @@ import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
 import axios from 'axios'
 import ListGroup from 'react-bootstrap/ListGroup';
-import { useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
 import { useReducer } from 'react';
 import { toast } from 'react-toastify';
@@ -39,7 +38,7 @@ const PlaceOrderScreen = () => {
 
   const { state, dispatch: ctxDispatch } = useContext(StoreContext);
   const { cart, userInfo } = state;
-  console.log(state)
+  console.log(cart)
 
   const round2 = (num) => Math.round(num * 100 + Number.EPSILON) / 100; //123.2345 => 123.23
 
