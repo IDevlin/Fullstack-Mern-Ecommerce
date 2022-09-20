@@ -21,6 +21,7 @@ const ShippingAddressScreen = () => {
   const [city, setCity] = useState(shippingAddress.city || '');
   const [postalCode, setPostalCode] = useState(shippingAddress.postalCode || '');
   const [country, setCountry] = useState(shippingAddress.country || '');
+  const [phone, setPhone]= useState(shippingAddress.phone || '')
 
   useEffect(()=> {
     if (!userInfo) {
@@ -34,6 +35,7 @@ const ShippingAddressScreen = () => {
       type: 'SAVE_SHIPPING_ADDRESS',
       payload: {
         fullName,
+        phone,
         address,
         city,
         postalCode,
@@ -44,6 +46,7 @@ const ShippingAddressScreen = () => {
       'shippingAddress',
       JSON.stringify({
         fullName,
+        phone,
         address,
         city,
         postalCode,
@@ -67,6 +70,14 @@ const ShippingAddressScreen = () => {
             <Form.Control
               value={fullName}
               onChange={(e) => setFullName(e.target.value)}
+              required
+            />
+          </Form.Group>
+          <Form.Group className="mb-3" controlId="phone">
+            <Form.Label>Phone</Form.Label>
+            <Form.Control
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
               required
             />
           </Form.Group>
