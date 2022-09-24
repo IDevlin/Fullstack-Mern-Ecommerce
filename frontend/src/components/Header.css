@@ -1,0 +1,133 @@
+/* CSS HEX */
+:root {
+  --scarlet: #ff2a00ff;
+  --oxford-blue: #002951ff;
+  --black: #000001ff;
+  --prussian-blue: #002f40ff;
+  --orange-pantone: #fe5900ff;
+  --scarlethsl: hsla(10, 100%, 50%, 1);
+  --oxford-blue: hsla(210, 100%, 16%, 1);
+  --blackhsl: hsla(240, 100%, 0%, 1);
+  --prussian-bluehsl: hsla(196, 100%, 13%, 1);
+  --orange-pantonehsl: hsla(21, 100%, 50%, 1);
+  --gradient-top: linear-gradient(
+    0deg,
+    #ff2a00ff,
+    #002951ff,
+    #000001ff,
+    #002f40ff,
+    #fe5900ff
+  );
+  --radient-right: linear-gradient(
+    90deg,
+    #ff2a00ff,
+    #002951ff,
+    #000001ff,
+    #002f40ff,
+    #fe5900ff
+  );
+  --gradient-bottom: linear-gradient(
+    180deg,
+    #ff2a00ff,
+    #002951ff,
+    #000001ff,
+    #002f40ff,
+    #fe5900ff
+  );
+  --gradient-left: linear-gradient(
+    270deg,
+    #ff2a00ff,
+    #002951ff,
+    #000001ff,
+    #002f40ff,
+    #fe5900ff
+  );
+  --gradient-top-right: linear-gradient(
+    45deg,
+    #ff2a00ff,
+    #002951ff,
+    #000001ff,
+    #002f40ff,
+    #fe5900ff
+  );
+  --gradient-bottom-right: linear-gradient(
+    135deg,
+    #ff2a00ff,
+    #002951ff,
+    #000001ff,
+    #002f40ff,
+    #fe5900ff
+  );
+  --gradient-top-left: linear-gradient(
+    225deg,
+    #ff2a00ff,
+    #002951ff,
+    #000001ff,
+    #002f40ff,
+    #fe5900ff
+  );
+  --gradient-bottom-left: linear-gradient(
+    315deg,
+    #ff2a00ff,
+    #002951ff,
+    #000001ff,
+    #002f40ff,
+    #fe5900ff
+  );
+  --gradient-radial: radial-gradient(
+    #ff2a00ff,
+    #002951ff,
+    #000001ff,
+    #002f40ff,
+    #fe5900ff
+  );
+}
+
+.head {
+  background-color: var(--oxford-blue);
+  padding: 10px 0;
+  color: #ffffff;
+}
+.head .f_flex {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 2em;
+}
+.phone_icon {
+  margin-left: -3em;
+}
+.head i {
+  margin-right: 1em;
+}
+section {
+  display: block;
+}
+
+.search.active {
+    height: 12vh;
+    position: fixed;
+    top: 0;
+    z-index: 1000;
+    width: 100%;
+    background-color: #ffff;
+    box-shadow: -1px 11px 24px -11px rgba(0, 0, 0, 0.5);
+    transition: 0.5s;
+ }
+
+ .search {
+    box-shadow: -1px 11px 24px -11px rgba(0, 0, 0, 0.5);
+    color:#000001ff
+ }
+
+ .image {
+    max-width: 40%;
+    object-fit: contain;
+    margin-right: -16em;
+    margin-left: -4em;
+ }
+
+ .form_contol {
+  outline: none;
+}
