@@ -4,15 +4,15 @@ import { Link } from 'react-router-dom'
 const Navbar = () => {
     const [MobileMenu , setMobileMenu] = useState(false)
   return (
-    <>
+    <div>
             <header className="header">
-                <div className="container d_flex">
+                <div className=" d_flex">
                 <div className="categories d_flex">
                     <span className="fa-solid fa-border-all"></span>
                     <h4>Categories <i className="fa fa-chevron-down"></i></h4>
                 </div>
                 <div className="navlink">
-                    <ul className={ MobileMenu ? 'nav-links-mobileMenu': 'link f_flex capitalize' } onClick={() => setMobileMenu(true)}>
+                    <ul className={ MobileMenu ? 'nav-links-mobileMenu': 'link f_flex capitalize' } onClick={() => setMobileMenu(false)}>
                         <li>
                           <Link to='/'>home</Link>
                         </li>
@@ -40,7 +40,7 @@ const Navbar = () => {
                 </div>
                 </div>
             </header>
-        </>
+        </div>
   )
 }
 

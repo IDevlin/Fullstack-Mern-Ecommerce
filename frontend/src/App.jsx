@@ -1,16 +1,9 @@
-import { StoreContext } from './Store';
-import Nav from 'react-bootstrap/Nav';
-import { useContext } from 'react';
-import Navbar from 'react-bootstrap/Navbar';
+
 import HomeScreen from './screens/HomeScreen';
-import Badge from 'react-bootstrap/esm/Badge';
-import Container from 'react-bootstrap/Container';
 import ProductScreen from './screens/ProductScreen';
-import { LinkContainer } from 'react-router-bootstrap';
-import { BrowserRouter, Link, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import CartScreen from './screens/CartScreen';
 import SigninScreen from './screens/SigninScreen';
-import NavDropdown from 'react-bootstrap/NavDropdown';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import ShippingAddressScreen from './screens/ShippingAddressScreen';

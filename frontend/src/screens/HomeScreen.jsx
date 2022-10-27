@@ -46,7 +46,7 @@ const HomeScreen = () => {
   }, []);
 
   return (
-    <div>
+    <div >
       <Helmet>
         <title>Shop</title>
       </Helmet>

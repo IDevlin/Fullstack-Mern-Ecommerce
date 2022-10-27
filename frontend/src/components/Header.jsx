@@ -19,10 +19,10 @@ const Header = () => {
     window.location.href = '/signin';
   };
   return (
-    <>
+    <div>
     <Head/>
     <SearchBox/>
-    </>
+    </div>
   )
 }
 
