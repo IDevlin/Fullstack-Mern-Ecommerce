@@ -12,7 +12,7 @@ const Navbar = () => {
                     <h4>Categories <i className="fa fa-chevron-down"></i></h4>
                 </div>
                 <div className="navlink">
-                    <ul className={ MobileMenu ? 'nav-links-mobileMenu': 'link f_flex capitalize' } onClick={() => setMobileMenu(false)}>
+                    <ul className={ MobileMenu ? 'nav-links-mobileMenu': 'link f_flex capitalize' } >
                         <li>
                           <Link to='/'>home</Link>
                         </li>

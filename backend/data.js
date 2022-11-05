@@ -61,7 +61,7 @@ const data = {
             category: 'Pants',
             image: '/images/p5.jpg',
             price: 35,
-            countInStock: 5,
+            countInStock: 20,
             brand: 'Puma',
             rating: 4.5,
             numReviews: 10,

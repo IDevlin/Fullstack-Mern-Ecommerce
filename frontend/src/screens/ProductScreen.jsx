@@ -55,9 +55,10 @@ const ProductScreen = () => {
 
   const { state, dispatch: ctxDispatch } = useContext(StoreContext);
   const { cart } = state;
+  console.log(cart)
  
   const addToCartHandler = async () => {
-      const existItem = cart.cartItems.find((x) => x._id === product._id);
+      const existItem = cart.cartItems.find((item) => item._id === product._id);
       const quantity = existItem ? existItem.quantity + 1 : 1;
       const { data } = await axios.get(`/api/products/id/${product._id}`);
       if (data.countInStock < quantity) {
