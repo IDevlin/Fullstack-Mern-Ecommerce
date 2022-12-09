@@ -1,9 +1,12 @@
 import { Link, NavLink } from 'react-router-dom';
 import { StoreContext } from '../Store.jsx';
 import Badge from 'react-bootstrap/esm/Badge';
-import { useState, useRef, useContext, useEffect } from 'react';
+import { useState, useContext, useRef, useEffect } from 'react';
 
 const SearchBox = () => {
+
+  const nav = useRef(null)
+  const[sideMenu, setSideMenu] = useState(false)
 
   const dropdownMenu =() => {
     const dropdown =  document.querySelector('.dropdown__menu')
@@ -18,6 +21,7 @@ const SearchBox = () => {
   });
 
   const { state, dispatch } = useContext(StoreContext);
+
   const { cart, userInfo } = state;
   console.log(cart);
 
@@ -27,17 +31,40 @@ const SearchBox = () => {
     localStorage.removeItem('userInfo');
     localStorage.removeItem('shippingAddress');
     localStorage.removeItem('paymentMethod');
-    this.location.href = '/signin';
+    //window.location.href = '/signin';
   };
+
+   const mobileToggle = ()=> {
+    
+      nav.current.classList.toggle('show')
+      
+       if(nav.current.classList.value.includes('show')){
+        setSideMenu(true)
+       }else{
+        setSideMenu(false)
+       }
+       
+   }
+
+   const signout = ()=>{
+    mobileToggle();
+    signoutHandler()
+   }
 
   return (
     <header className="header">
      
       <Link to="/">{<img className="image" src="./logo.png" />}</Link>
 
-      <i class="bx bx-menu header__toggle" id="header-toggle"></i>
      
-      <nav className="nav" id="nav-menu">
+          {!sideMenu ? (
+            <i className="bx bx-menu header__toggle" id="header-toggle" onClick={()=> mobileToggle()}></i>
+          ) : (
+            <i className="bx bx-x header__toggle" onClick={()=> mobileToggle()}></i>
+          )}{' '}
+       
+     
+   <nav  className="nav " id="nav-menu" ref={nav}>
         <div className="nav__content bd-grid">
           <div className="nav__img">
             <img  className="image" src="./logo.png" />
@@ -54,7 +81,7 @@ const SearchBox = () => {
                 <span>All Category</span>
   </div>*/}
               <li className="nav__item">
-                <NavLink to="/cart" >
+                <NavLink to="/cart"  onClick={()=> mobileToggle()}>
                   {' '}<span>Cart <i className="fa fa-shopping-bag icon_circle"></i></span>
                   
                   {cart.cartItems.length > 0 && (
@@ -70,18 +97,18 @@ const SearchBox = () => {
               {userInfo ? (
                 <li className="nav__item dropdown" onClick={() => dropdownMenu()}>
                   <span className="nav__link dropdown__link">
-                    {userInfo.name}
-                    <i class="bx bx-chevron-down dropdown__icon"></i>
+                    {userInfo.name}{' '}
+                    <i class="bx bx-chevron-down dropdown__icon icon_rotate"></i>
                   </span>
                   <ul className="dropdown__menu ">
                     <li class="dropdown__item">
-                      <Link to="/profile">Edit Profile</Link>
+                      <Link to="/profile"  onClick={()=> mobileToggle()}>Edit Profile</Link>
                     </li>
                     <li class="dropdown__item">
-                      <Link to="/orderhistory">Order History</Link>
+                      <Link to="/orderhistory"  onClick={()=> mobileToggle()}>Order History</Link>
                     </li>
                     <li class="dropdown__item">
-                      <Link to="#signout" onClick={signoutHandler}>
+                      <Link to="/signin" onClick={()=> signout()} >
                         Sign Out
                       </Link>
                     </li>
@@ -89,7 +116,7 @@ const SearchBox = () => {
                 </li>
               ) : (
                 <li className="nav__item">
-                <Link className="nav-link" to="/signin">
+                <Link className="nav-link" to="/signin" onClick={()=> mobile()}>
                 Sign In
               </Link>
               </li>
