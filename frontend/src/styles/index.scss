@@ -1,0 +1,21 @@
+/* CSS HEX */
+:root {
+    --scarlet: #ff2a00ff;
+    --oxford-blue: #002951ff;
+    --black: #000001ff;
+    --prussian-blue: #002f40ff;
+    --orange-pantone: #fe5900ff;
+    --scarlethsl: hsla(10, 100%, 50%, 1);
+    --oxford-blue: hsla(210, 100%, 16%, 1);
+    --blackhsl: hsla(240, 100%, 0%, 1);
+    --prussian-bluehsl: hsla(196, 100%, 13%, 1);
+    --orange-pantonehsl: hsla(21, 100%, 50%, 1);
+    --speed: 500ms;
+  }
+  
+@import './HeaderMenu.scss';
+@import './HomeScreen.scss';
+@import './PlaceOrder.scss';
+@import './Product.scss';
+@import './Head.scss';
+@import './App.scss'

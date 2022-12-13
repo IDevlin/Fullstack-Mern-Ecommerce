@@ -1,9 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './App.css';
+import './styles/index.scss'
 import App from './App';
-import './index.css';
 import './normalize.css';
 import { HelmetProvider } from 'react-helmet-async';
 import { StoreProvider } from './Store';

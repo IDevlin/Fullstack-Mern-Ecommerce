@@ -14,6 +14,8 @@ import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
 import { getError } from '../utils.js';
 import { StoreContext } from '../Store';
+import Modal from '../components/modal/SingleProductModal';
+
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -28,10 +30,10 @@ const reducer = (state, action) => {
   }
 };
 
-const ProductScreen = () => {
+const ProductScreen = ({slug}) => {
  const navigate = useNavigate()
-  const params = useParams();
-  const { slug } = params;
+ console.log(slug)
+
 
   const [{ loading, error, product }, dispatch] = useReducer(reducer, {
     product: [],
@@ -52,6 +54,7 @@ const ProductScreen = () => {
     };
     fetchData();
   }, [slug]);
+  
 
   const { state, dispatch: ctxDispatch } = useContext(StoreContext);
   const { cart } = state;
@@ -72,23 +75,17 @@ const ProductScreen = () => {
     navigate('/cart')
   };
 
-  return loading ? (
-    <LoadingBox />
-  ) : error ? (
-    <MessageBox variant={'danger'}>{error}</MessageBox>
-  ) : (
-    <div>
+  return(
+    <>
+    <Modal>
       <Row>
+        <h1>{product.name}</h1>
         <Col md={6}>
           <img className="img-large" src={product.image} alt={product.name} />
         </Col>
-        <Col md={3}>
+        <Col md={2}>
           <ListGroup variant="flush">
-            <ListGroup.Item>
-              <Helmet>
-                <title>Shop: {product.name}</title>
-              </Helmet>
-            </ListGroup.Item>
+           
             <Rating
               rating={product.rating}
               numReviews={product.numReviews}
@@ -99,25 +96,24 @@ const ProductScreen = () => {
             </ListGroup.Item>
           </ListGroup>
         </Col>
-        <Col md={3}>
+        <Col md={4}>
           <Card className="mt-2">
             <Card.Body>
               <ListGroup variant="flush">
                 <ListGroup.Item>
                   <Row>
-                    <Col>Precio:</Col>
-                    <Col>Precio: ${product.price}</Col>
+                  
+                    <Col>Price: ${product.price}</Col>
                   </Row>
                 </ListGroup.Item>
                 <ListGroup.Item>
                   <Row>
                     <Col>Status:</Col>
                     <Col>
-                      {' '}
                       {product.countInStock > 0 ? (
-                        <Badge bg="success">Success</Badge>
+                        <Badge bg="success">Avaliable</Badge>
                       ) : (
-                        <Badge bg="danger">Agotado</Badge>
+                        <Badge bg="danger">Out Stock</Badge>
                       )}
                     </Col>
                   </Row>
@@ -136,8 +132,9 @@ const ProductScreen = () => {
           </Card>
         </Col>
       </Row>
-    </div>
-  );
+    </Modal>
+    </>
+  )
 };
 
 export default ProductScreen;

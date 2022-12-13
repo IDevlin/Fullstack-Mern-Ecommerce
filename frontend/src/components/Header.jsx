@@ -3,9 +3,9 @@ import { useContext } from 'react';
 import { StoreContext } from '../Store';
 import { Link } from 'react-router-dom';
 import Head from '../components/Head';
-import SearchBox from '../components/SearchBox';
 import Navbar from '../components/Navbar';
 import './Header.css'
+import HeaderMenu from './HeaderMenu';
 
 const Header = () => {
     const { state, dispatch } = useContext(StoreContext);
@@ -21,7 +21,7 @@ const Header = () => {
   return (
     <div>
     <Head/>
-    <SearchBox/>
+    <HeaderMenu/>
     </div>
   )
 }

@@ -1,0 +1,21 @@
+.head {
+    background-color: var(--oxford-blue);
+    padding: 10px 0;
+    color: #ffffff;
+    width: 100%;
+    
+    .f_flex {
+        display: flex;
+        align-items: center;
+        flex-direction: row;
+        justify-content: space-around;
+        gap: 2em;
+      }
+      i {
+        margin-right: 1em;
+      }
+      .phone_icon {
+        margin-left: -3em;
+      }
+      
+  }

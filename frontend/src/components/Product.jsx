@@ -6,9 +6,9 @@ import { useContext } from 'react';
 import axios from 'axios';
 import {StoreContext} from '../Store';
 
-const Product = (props) => {
+
+const Product = ({product, slug, setSlug, modalHandler}) => {
   const navigate = useNavigate()
-  const { product } = props;
 
   const { state, dispatch: ctxDispatch } = useContext(StoreContext);
   const {
@@ -32,9 +32,9 @@ const Product = (props) => {
 
   return (
     <div className="product">
-      <Link to={`product/${product.slug}`}>
+      <div  onClick={()=> modalHandler(product)}>
         <img src={product.image} className="card-img-top" alt={product.name} />
-      </Link>
+      </div>
       <div className="product-info">
         <Link to={`product/${product.slug}`}>
           <p>{product.name}</p>
@@ -46,6 +46,7 @@ const Product = (props) => {
        {product.countInStock == 0 ? <Button variant='light' disabled>Sin Stock</Button>:<Button onClick={()=> addToCartHandler()}>Agregar al Carrito</Button> } 
       
       </div>
+  
     </div>
   );
 };

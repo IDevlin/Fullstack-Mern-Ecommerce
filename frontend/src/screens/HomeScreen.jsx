@@ -1,6 +1,5 @@
 //import React, { useState } from 'react';
-import React from 'react';
-import { useReducer, useEffect } from 'react';
+import { useReducer, useEffect, useState } from 'react';
 import axios from 'axios';
 import logger from 'use-reducer-logger';
 import Product from '../components/Product';
@@ -8,6 +7,9 @@ import { Helmet } from 'react-helmet-async';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
 import Navbar from '../components/Navbar';
+import SingleProductModal from '../components/modal/SingleProductModal';
+import useProductScreen from '../hooks/useProduct';
+import ProductScreen from './ProductScreen';
 //import data from '../data';
 
 const reducer = (state, action) => {
@@ -23,7 +25,14 @@ const reducer = (state, action) => {
   }
 };
 
+
 const HomeScreen = () => {
+  
+  const [modal, setModal] = useState(false)
+
+  const [slug, setSlug] = useState('')
+
+  
   const [{ loading, error, products }, dispatch] = useReducer(logger(reducer), {
     products: [],
     loading: true,
@@ -32,6 +41,7 @@ const HomeScreen = () => {
 
   // const [products, setProducts] = useState([]);
   useEffect(() => {
+    console.log(products)
     const fetchData = async () => {
       dispatch({ type: 'FETCH_REQUEST' });
       try {
@@ -44,6 +54,13 @@ const HomeScreen = () => {
     };
     fetchData();
   }, []);
+
+  const modalHandler = (product)=> {
+    const  productItem= products.find((item)=> item.slug === product.slug)
+    setSlug(productItem.slug)
+    setModal(!modal)
+  }
+
 
   return (
     <div >
@@ -59,10 +76,12 @@ const HomeScreen = () => {
           <MessageBox variant="danger">{error}</MessageBox>
         ) : (
           products.map((product) => (
-            <Product key={product.slug} product={product} ></Product>
+            <Product key={product.slug} product={product} slug={slug} setSlug={setSlug} modalHandler={modalHandler}></Product>
+            
           ))
         )}
       </div>
+     {modal && <ProductScreen slug={slug}></ProductScreen>}
     </div>
   );
 };
