@@ -9,12 +9,9 @@ import Badge from 'react-bootstrap/Badge';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import Rating from '../components/Rating';
-import { Helmet } from 'react-helmet-async';
-import LoadingBox from '../components/LoadingBox';
-import MessageBox from '../components/MessageBox';
 import { getError } from '../utils.js';
 import { StoreContext } from '../Store';
-import Modal from '../components/modal/SingleProductModal';
+import Modal from '../components/modal/Modal';
 
 
 const reducer = (state, action) => {

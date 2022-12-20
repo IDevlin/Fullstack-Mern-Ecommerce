@@ -19,6 +19,7 @@
       .nav__menu {
         position: relative;
         top: 0.9em;
+        right: 3em;
       }
       .nav__img {
         width: 120px;
@@ -52,21 +53,32 @@
         color: rgb(48, 47, 47);
         font-size: 18px;
         font-weight: 600;
+        &:hover{
+          text-decoration: underline;
+          cursor: pointer;
+        }
       }
       .dropdown__icon {
         font-size: 1.3rem;
         transition: .5s;
       }
       .dropdown__menu {
-        margin: 1rem 0 0 1rem;
+        margin: 1rem 0 0 1rem; 
+        z-index: 10;
+        visibility: hidden;
+    
+
+        outline:  outline-width;
       }
       .icon_rotate {
         transform: rotate(180deg);
       }
 
-      .hide {
-        display: none;
+      .hide {  
+        top: 2em; 
+        visibility: visible;
       }
+
 
       /*Show menu*/
       .show {
@@ -91,7 +103,7 @@
         padding: 2rem 0;
         z-index: 100;
         transition: .5s;
-        overflow-y: auto;
+       
         margin-left: -1em;
       }
   
@@ -117,11 +129,11 @@
     .dropdown__menu {
       position: absolute;
       top: 1em;
-      width: 130px;
+      width: 10em;
       padding: 1em;
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
       border-radius: .5rem;
-      transform: translateX(-50px);
+      transform: translateX(-6.5em);
       background: #FFF;
       transition: ease .5s;
     }

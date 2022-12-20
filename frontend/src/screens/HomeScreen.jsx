@@ -6,10 +6,8 @@ import Product from '../components/Product';
 import { Helmet } from 'react-helmet-async';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
-import Navbar from '../components/Navbar';
-import SingleProductModal from '../components/modal/SingleProductModal';
-import useProductScreen from '../hooks/useProduct';
 import ProductScreen from './ProductScreen';
+import { lazy } from 'react';
 //import data from '../data';
 
 const reducer = (state, action) => {
@@ -29,7 +27,6 @@ const reducer = (state, action) => {
 const HomeScreen = () => {
   
   const [modal, setModal] = useState(false)
-
   const [slug, setSlug] = useState('')
 
   
