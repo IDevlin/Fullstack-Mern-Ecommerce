@@ -1,10 +1,11 @@
 .admin_container{
     display: grid;
-    grid-template-columns: 250px 1fr;
+    grid-template-columns: 350px 1fr;
      #outlet{ 
+      margin: .8em -3em;
       position: relative;
-      width: 70em;
-      height:40em;
+      width: 98%;
+      height:42em;
       overflow: auto;
         
      }

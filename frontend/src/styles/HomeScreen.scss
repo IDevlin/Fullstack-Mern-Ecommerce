@@ -1,7 +1,12 @@
-.products {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
-    
- }
+
+.home_container{
+    padding: 1em;
+    .products {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        
+     }
+}
+

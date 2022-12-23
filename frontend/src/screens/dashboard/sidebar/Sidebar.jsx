@@ -1,24 +1,36 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useRef, useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import routes from '../views/routes';
 
 const Sidebar = () => {
+  const [route, setRoute] = useState('');
+  const location = useLocation();
+
+  useEffect(() => {
+    setRoute(window.location.pathname);
+  }, [location]);
+
+  const activeRoute = (prop) => {
+    return route.indexOf(prop.path) !== -1 ? 'active' : '';
+  };
+
   return (
     <div className="sidebar_wrapper">
       <div className="sidebar_header">
         <span>Admin Panel</span>
       </div>
       <ul className="sidebar_list">
-        <li>
-          <Link to="/admin/dashboard">
-            <i className="bx bxs-dashboard"></i> <span>Dasboard</span>
-          </Link>
-        </li>
-        <li><Link to="/admin/dashboard">
-        <i className='bx bxl-product-hunt' ></i> <span>Products</span>
-          </Link></li>
-        <li><Link to="/admin/dashboard">
-        <i className='bx bxs-user-circle' ></i> <span>Users</span>
-          </Link></li>
+      
+        {routes.map((props, key) => {
+          return (
+            <li className={activeRoute(props)} key={key}>
+              <Link to={props.path}>
+                <i className={props.icon}></i> <span>{props.name}</span>
+              </Link>        
+            </li>
+          );
+        })}
+       
       </ul>
     </div>
   );

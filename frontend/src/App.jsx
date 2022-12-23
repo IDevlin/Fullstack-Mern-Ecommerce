@@ -1,5 +1,5 @@
 import HomeScreen from './screens/HomeScreen';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Route, Routes, useLocation } from 'react-router-dom';
 import CartScreen from './screens/CartScreen';
 import SigninScreen from './screens/SigninScreen';
 import { ToastContainer } from 'react-toastify';
@@ -14,15 +14,17 @@ import ProfileScreen from './screens/ProfileScreen';
 import ProtectedRoute from './components/ProtectedRoute';
 import AdminRoute from './components/AdminRoute';
 import Header from './components/Header';
+import ProductEditScreen from './screens/dashboard/ProductEditScreen';
 import OrderListScreen from './screens/dashboard/OrderListScreen.jsx';
 import UserListScreen from './screens/dashboard/UserListScreen';
 import ProductListScreen from './screens/dashboard/ProductListScreen';
-import ProductEditScreen from './screens/dashboard/ProductEditScreen';
 import UserEditScreen from './screens/dashboard/UserEditScreen';
 import DashboardScreen from './screens/dashboard/DashboardScreen';
 import AdminPanel from './screens/dashboard/adminpanel/AdminPanel';
 
+
 function App() {
+
   return (
     <BrowserRouter>
       <div className="d-flex flex-column site-container">
@@ -43,7 +45,7 @@ function App() {
             />
             {/************ ADMIN ROUTES ***********/}
             <Route
-              path="/admin"
+              path="/admin/"
               element={
                 <AdminRoute>
                   <AdminPanel />
@@ -51,13 +53,29 @@ function App() {
               }
             >
               <Route
-                path="Dashboard"
+                path="dashboard"
                 element={
                   <AdminRoute>
                     <DashboardScreen />
                   </AdminRoute>
                 }
               />
+              <Route
+              path="products"
+              element={
+                <AdminRoute>
+                  <ProductListScreen />
+                </AdminRoute>
+              }
+            />
+            <Route
+              path="/admin/products/:id"
+              element={
+                <AdminRoute>
+                  <ProductEditScreen />
+                </AdminRoute>
+              }
+            />
               <Route
               path="orders"
               element={
@@ -74,12 +92,11 @@ function App() {
                 </AdminRoute>
               }
             />
+            
             </Route>
-
             <Route path="/shipping" element={<ShippingAddressScreen />} />
             <Route path="/payment" element={<PaymentMethodScreen />} />
             {/*Admin Routes */}
-          
             <Route path="/placeorder" element={<PlaceOrderScreen />} />
             <Route
               path="/order/:id"
@@ -96,25 +113,7 @@ function App() {
                   <OrderHistoryScreen />
                 </ProtectedRoute>
               }
-            />
-
-         
-            <Route
-              path="/admin/products"
-              element={
-                <AdminRoute>
-                  <ProductListScreen />
-                </AdminRoute>
-              }
-            />
-            <Route
-              path="/admin/product/:id"
-              element={
-                <AdminRoute>
-                  <ProductEditScreen />
-                </AdminRoute>
-              }
-            />
+            />   
             <Route
               path="/admin/user/:id"
               element={

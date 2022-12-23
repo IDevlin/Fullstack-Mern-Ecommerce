@@ -1,44 +1,40 @@
 //import React, { useState } from 'react';
-import { useReducer, useEffect, useState } from 'react';
+import { useReducer, useEffect, useState, useCallback, useMemo, lazy, Suspense } from 'react';
 import axios from 'axios';
 import logger from 'use-reducer-logger';
 import Product from '../components/Product';
 import { Helmet } from 'react-helmet-async';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
-import ProductScreen from './ProductScreen';
-import { lazy } from 'react';
-//import data from '../data';
+const ProductScreenLazy = lazy(() => import('./ProductScreen'));
 
-const reducer = (state, action) => {
-  switch (action.type) {
+
+const reducer = (state, { type, payload }) => {
+  switch (type) {
     case 'FETCH_REQUEST':
       return { ...state, loading: true };
     case 'FETCH_SUCCESS':
-      return { ...state, products: action.payload, loading: false };
+      return { ...state, products: payload, loading: false };
     case 'FETCH_FAIL':
-      return { ...state, loading: false, error: action.payload };
+      return { ...state, loading: false, error: payload };
     default:
       return state;
   }
 };
-
 
 const HomeScreen = () => {
   
   const [modal, setModal] = useState(false)
   const [slug, setSlug] = useState('')
 
-  
   const [{ loading, error, products }, dispatch] = useReducer(logger(reducer), {
     products: [],
     loading: true,
     error: '',
   });
 
-  // const [products, setProducts] = useState([]);
   useEffect(() => {
-    console.log(products)
+   document.querySelector('html').style.overflow = 'auto' //active overflow in this view
     const fetchData = async () => {
       dispatch({ type: 'FETCH_REQUEST' });
       try {
@@ -52,15 +48,29 @@ const HomeScreen = () => {
     fetchData();
   }, []);
 
-  const modalHandler = (product)=> {
-    const  productItem= products.find((item)=> item.slug === product.slug)
-    setSlug(productItem.slug)
-    setModal(!modal)
-  }
+  const modalHandler = useCallback((product) => {
+    const productItem = products.find((item) => item.slug === product.slug);
+    setSlug(productItem.slug);
+    setModal(!modal);
+  }, [modal, products]);
+
+  const productElements = useMemo(
+    () =>
+      products.map((product) => (
+        <Product
+          key={product.slug}
+          product={product}
+          slug={slug}
+          setSlug={setSlug}
+          modalHandler={modalHandler}
+        ></Product>
+      )),
+    [products, slug, setSlug, modalHandler]
+  );
 
 
   return (
-    <div >
+    <div className='home_container'>
       <Helmet>
         <title>Shop</title>
       </Helmet>
@@ -72,13 +82,14 @@ const HomeScreen = () => {
         ) : error ? (
           <MessageBox variant="danger">{error}</MessageBox>
         ) : (
-          products.map((product) => (
-            <Product key={product.slug} product={product} slug={slug} setSlug={setSlug} modalHandler={modalHandler}></Product>
-            
-          ))
+         productElements
         )}
       </div>
-     {modal && <ProductScreen slug={slug}></ProductScreen>}
+      {modal && (
+  <Suspense fallback={<LoadingBox />}>
+    <ProductScreenLazy slug={slug} />
+  </Suspense>
+)}
     </div>
   );
 };

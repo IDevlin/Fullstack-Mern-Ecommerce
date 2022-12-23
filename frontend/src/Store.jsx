@@ -1,4 +1,5 @@
 import { createContext, useReducer } from 'react';
+import { useLocation } from 'react-router-dom';
 
 export const StoreContext = createContext();
 
@@ -85,7 +86,7 @@ export const StoreProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
   const value = { state, dispatch };
   return (
-    <StoreContext.Provider value={value}>{children}</StoreContext.Provider>
+    <StoreContext.Provider value={value} >{children}</StoreContext.Provider>
   );
 };
 

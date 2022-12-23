@@ -59,6 +59,7 @@ export default function ProductEditScreen() {
   const [price, setPrice] = useState('');
   const [image, setImage] = useState('');
   const [images, setImages] = useState([]);
+  const [thumbnail, setThumbnail] = useState('')
   const [category, setCategory] = useState('');
   const [countInStock, setCountInStock] = useState('');
   const [brand, setBrand] = useState('');
@@ -72,6 +73,7 @@ export default function ProductEditScreen() {
         setName(data.name);
         setSlug(data.slug);
         setPrice(data.price);
+        setThumbnail(data.thumbnail)
         setImage(data.image);
         setImages(data.images);
         setCategory(data.category);
@@ -154,11 +156,13 @@ export default function ProductEditScreen() {
     toast.success('Image removed successfully. click Update to apply it');
   };
   return (
+    <>
+    <h2>Edit Product</h2>
     <Container className="small-container">
       <Helmet>
         <title>Edit Product ${productId}</title>
       </Helmet>
-      <h1>Edit Product {productId}</h1>
+      <h2>ID: {productId}</h2>
 
       {loading ? (
         <LoadingBox></LoadingBox>
@@ -268,5 +272,6 @@ export default function ProductEditScreen() {
         </Form>
       )}
     </Container>
+    </>
   );
 }

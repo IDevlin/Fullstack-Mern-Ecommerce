@@ -21,8 +21,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.get('/api/keys/paypal', (req, res) => {
-  res.send(process.env.PAYPAL_CLIENT_ID || 'sb')
-})
+  res.send(process.env.PAYPAL_CLIENT_ID || 'sb');
+});
 
 app.use('/api/index', indexRouter);
 app.use('/api/products', productRouter);

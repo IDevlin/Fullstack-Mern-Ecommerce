@@ -70,14 +70,16 @@ export default function ProductListScreen() {
   });
 
   const navigate = useNavigate();
-  const { search } = useLocation();
-  const sp = new URLSearchParams(search);
+  const { sea } = useLocation();
+ 
+  const sp = new URLSearchParams(sea);
   const page = sp.get('page') || 1;
 
   const { state } = useContext(StoreContext);
   const { userInfo } = state;
 
   useEffect(() => {
+    console.log(sp)
     const fetchData = async () => {
       try {
         const { data } = await axios.get(`/api/products/admin?page=${page} `, {
@@ -108,7 +110,7 @@ export default function ProductListScreen() {
         );
         toast.success('product created successfully');
         dispatch({ type: 'CREATE_SUCCESS' });
-        navigate(`/admin/product/${data.product._id}`);
+        navigate(`/admin/products/${data.product._id}`);
       } catch (err) {
         toast.error(getError(error));
         dispatch({
@@ -163,6 +165,7 @@ export default function ProductListScreen() {
             <thead>
               <tr>
                 <th>ID</th>
+                <th>IMG</th>
                 <th>NAME</th>
                 <th>PRICE</th>
                 <th>CATEGORY</th>
@@ -174,6 +177,7 @@ export default function ProductListScreen() {
               {products.map((product) => (
                 <tr key={product._id}>
                   <td>{product._id}</td>
+                  <td> <img src={product.thumbnail} alt="product img" /></td>
                   <td>{product.name}</td>
                   <td>{product.price}</td>
                   <td>{product.category}</td>
