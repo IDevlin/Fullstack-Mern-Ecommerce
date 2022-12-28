@@ -21,9 +21,7 @@ const HeaderMenu = () => {
   });*/
 
   const { state, dispatch } = useContext(StoreContext);
-
   const { cart, userInfo } = state;
-  console.log(userInfo);
 
   const signoutHandler = () => {
     dispatch({ type: 'USER_SIGNOUT' });

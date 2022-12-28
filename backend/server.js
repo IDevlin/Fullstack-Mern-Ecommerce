@@ -7,6 +7,7 @@ import indexRouter from "./routes/indexRouter.js";
 import productRouter from "./routes/productRoutes.js";
 import userRouter from "./routes/userRoutes.js";
 import orderRouter from "./routes/orderRoutes.js";
+import uploadRouter from "./routes/uploadRoutes.js";
 
 
 mongoose.set('strictQuery', true);
@@ -27,6 +28,7 @@ app.get("/api/keys/paypal", (req, res) => {
 });
 
 app.use("/api/index", indexRouter);
+app.use('/api/upload', uploadRouter);
 app.use("/api/products", productRouter);
 app.use("/api/users", userRouter);
 app.use("/api/orders", orderRouter);

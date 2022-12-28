@@ -6,11 +6,11 @@ import User from '../models/userModel.js';
 const indexRouter = express.Router();
 
 indexRouter.get('/', async (req, res) => {
-  await Product.deleteMany({});
-  const createProducts = await Product.insertMany(data.products);
-  await User.deleteMany({});
-  const createUsers = await User.insertMany(data.users);
-  res.send({ createProducts, createUsers });
+  await Product.remove({});
+  const createdProducts = await Product.insertMany(data.products);
+  await User.remove({});
+  const createdUsers = await User.insertMany(data.users);
+  res.send({ createdProducts, createdUsers });
 });
 
 export default indexRouter;

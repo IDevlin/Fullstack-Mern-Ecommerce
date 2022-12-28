@@ -45,6 +45,7 @@ export default function ProductEditScreen() {
   const navigate = useNavigate();
   const params = useParams(); // /product/:id
   const { id: productId } = params;
+  console.log(params.id)
 
   const { state } = useContext(StoreContext);
   const { userInfo } = state;
@@ -54,42 +55,40 @@ export default function ProductEditScreen() {
       error: '',
     });
 
-  const [name, setName] = useState('');
-  const [slug, setSlug] = useState('');
-  const [price, setPrice] = useState('');
-  const [image, setImage] = useState('');
-  const [images, setImages] = useState([]);
-  const [thumbnail, setThumbnail] = useState('')
-  const [category, setCategory] = useState('');
-  const [countInStock, setCountInStock] = useState('');
-  const [brand, setBrand] = useState('');
-  const [description, setDescription] = useState('');
+    const [name, setName] = useState('');
+    const [slug, setSlug] = useState('');
+    const [price, setPrice] = useState('');
+    const [image, setImage] = useState('');
+    const [images, setImages] = useState([]);
+    const [category, setCategory] = useState('');
+    const [countInStock, setCountInStock] = useState('');
+    const [brand, setBrand] = useState('');
+    const [description, setDescription] = useState('');
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        dispatch({ type: 'FETCH_REQUEST' });
-        const { data } = await axios.get(`/api/products/${productId}`);
-        setName(data.name);
-        setSlug(data.slug);
-        setPrice(data.price);
-        setThumbnail(data.thumbnail)
-        setImage(data.image);
-        setImages(data.images);
-        setCategory(data.category);
-        setCountInStock(data.countInStock);
-        setBrand(data.brand);
-        setDescription(data.description);
-        dispatch({ type: 'FETCH_SUCCESS' });
-      } catch (err) {
-        dispatch({
-          type: 'FETCH_FAIL',
-          payload: getError(err),
-        });
-      }
-    };
-    fetchData();
-  }, [productId]);
+    useEffect(() => {
+      const fetchData = async () => {
+        try {
+          dispatch({ type: 'FETCH_REQUEST' });
+          const { data } = await axios.get(`/api/products/${productId}`);
+          setName(data.name);
+          setSlug(data.slug);
+          setPrice(data.price);
+          setImage(data.image);
+          setImages(data.images);
+          setCategory(data.category);
+          setCountInStock(data.countInStock);
+          setBrand(data.brand);
+          setDescription(data.description);
+          dispatch({ type: 'FETCH_SUCCESS' });
+        } catch (err) {
+          dispatch({
+            type: 'FETCH_FAIL',
+            payload: getError(err),
+          });
+        }
+      };
+      fetchData();
+    }, [productId]);
 
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -123,6 +122,7 @@ export default function ProductEditScreen() {
       dispatch({ type: 'UPDATE_FAIL' });
     }
   };
+
   const uploadFileHandler = async (e, forImages) => {
     const file = e.target.files[0];
     const bodyFormData = new FormData();
@@ -148,6 +148,7 @@ export default function ProductEditScreen() {
       dispatch({ type: 'UPLOAD_FAIL', payload: getError(err) });
     }
   };
+
   const deleteFileHandler = async (fileName, f) => {
     console.log(fileName, f);
     console.log(images);

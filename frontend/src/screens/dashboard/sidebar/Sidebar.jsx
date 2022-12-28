@@ -11,7 +11,8 @@ const Sidebar = () => {
   }, [location]);
 
   const activeRoute = (prop) => {
-    return route.indexOf(prop.path) !== -1 ? 'active' : '';
+    console.log(prop)
+    return route.indexOf(prop.path) !== -1? 'active' : '';
   };
 
   return (

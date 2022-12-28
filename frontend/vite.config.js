@@ -9,7 +9,8 @@ export default defineConfig({
       "/api/index": "http://localhost:5000/",
       "/api/users": "http://localhost:5000/",
       "/api/orders": "http://localhost:5000/",
-      "/api/keys/paypal": "http://localhost:5000/"
+      "/api/keys/paypal": "http://localhost:5000/",
+      "/api/upload": "http://localhost:5000/"
     },
   },
   plugins: [react()],

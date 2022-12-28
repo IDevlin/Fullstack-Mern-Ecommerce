@@ -69,7 +69,7 @@ function App() {
               }
             />
             <Route
-              path="/admin/products/:id"
+              path="products/:id"
               element={
                 <AdminRoute>
                   <ProductEditScreen />
@@ -92,6 +92,14 @@ function App() {
                 </AdminRoute>
               }
             />
+            <Route
+              path="users/:id"
+              element={
+                <AdminRoute>
+                  <UserEditScreen />
+                </AdminRoute>
+              }
+            ></Route>
             
             </Route>
             <Route path="/shipping" element={<ShippingAddressScreen />} />
@@ -114,14 +122,7 @@ function App() {
                 </ProtectedRoute>
               }
             />   
-            <Route
-              path="/admin/user/:id"
-              element={
-                <AdminRoute>
-                  <UserEditScreen />
-                </AdminRoute>
-              }
-            ></Route>
+            
 
             <Route path="/" element={<HomeScreen />} />
           </Routes>

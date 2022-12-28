@@ -15,20 +15,19 @@ const Product = ({product, slug, setSlug, modalHandler}) => {
     cart: { cartItems },
   } = state;
 
-  const addToCartHandler = async () => {
+  const addToCartHandler = async (item) => {
     const existItem = cartItems.find((x) => x._id === product._id);
     const quantity = existItem ? existItem.quantity + 1 : 1;
-    const { data } = await axios.get(`/api/products/id/${product._id}`);
+    const { data } = await axios.get(`/api/products/${item._id}`);
     if (data.countInStock < quantity) {
       window.alert('Sorry. Product is out of stock');
       return;
-  }
-  ctxDispatch({
-    type: 'CART_ADD_ITEM',
-    payload: { ...product, quantity },
-  });
-  navigate('/cart')
-};
+    }
+    ctxDispatch({
+      type: 'CART_ADD_ITEM',
+      payload: { ...item, quantity },
+    });
+  };
 
   return (
     <div className="product">
@@ -43,7 +42,7 @@ const Product = ({product, slug, setSlug, modalHandler}) => {
         <p>
           <strong>Precio: ${product.price}</strong>
         </p>
-       {product.countInStock == 0 ? <Button variant='light' disabled>Sin Stock</Button>:<Button onClick={()=> addToCartHandler()}>Agregar al Carrito</Button> } 
+       {product.countInStock == 0 ? <Button variant='light' disabled>Sin Stock</Button>:<Button onClick={()=> addToCartHandler(product)}>Agregar al Carrito</Button> } 
       
       </div>
   
