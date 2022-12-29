@@ -11,7 +11,7 @@
     --prussian-bluehsl: hsla(196, 100%, 13%, 1);
     --orange-pantonehsl: hsla(21, 100%, 50%, 1);
     --speed: 500ms;
-    $default-color:              #66615B !default;
+    $default-color: #66615B !default;
   }
   
 @import './HeaderMenu.scss';
@@ -23,4 +23,4 @@
 @import './Sidebar.scss';
 @import './AdminPanel.scss';
 @import './SearchBar.scss';
-@import './FilterListToggle.scss'
+@import './FilterPanel.scss';

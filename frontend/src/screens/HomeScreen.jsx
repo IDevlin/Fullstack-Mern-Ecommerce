@@ -16,6 +16,7 @@ import LoadingBox from "../components/LoadingBox";
 import MessageBox from "../components/MessageBox";
 import SearchBar from "./SearchBar";
 import FilterPanel from "./FilterPanel";
+import { categoriesList } from "./list";
 const ProductScreenLazy = lazy(() => import("./ProductScreen"));
 
 const reducer = (state, { type, payload }) => {
@@ -38,19 +39,15 @@ const HomeScreen = () => {
   const [selectedBrands, setSelectedBrands] = useState(null);
   const [selectedPrice, setSelectedPrice] = useState([5, 100]);
   const [resultsFound, setResultsFound] = useState(true);
-
-  const [categories, setCategories] = useState([
-    { id: 1, checked: false, label: 'Shoes' },
-    { id: 2, checked: false, label: 'Clothes' },
-    { id: 3, checked: false, label: 'Accessories' },
-  ]);
-
-  const [{ loading, error, products }, dispatch] = useReducer(logger(reducer), {
+  const [categories, setCategories] = useState(categoriesList);
+ 
+  const [{ loading, error, products }, dispatch] = useReducer(reducer, {
     products: [],
     loading: true,
     error: "",
   });
-  const [list, setList] = useState(products);
+
+  const [listProducts, setListProducts] = useState(products);
 
   useEffect(() => {
     document.querySelector("html").style.overflow = "auto"; //active overflow in this view
@@ -63,8 +60,10 @@ const HomeScreen = () => {
         dispatch({ type: "FETCH_FAIL", payload: err.message });
       }
     };
+    
     fetchData();
-  }, []);
+    applyFirters();
+  }, [selectedBrands, searchInput, selectedPrice, categories]);
 
   const modalHandler = useCallback(
     (product) => {
@@ -75,19 +74,7 @@ const HomeScreen = () => {
     [modal, products]
   );
 
-  const productElements = useMemo(
-    () =>
-      products.map((product) => (
-        <Product
-          key={product.slug}
-          product={product}
-          slug={slug}
-          setSlug={setSlug}
-          modalHandler={modalHandler}
-        ></Product>
-      )),
-    [products, slug, setSlug, modalHandler]
-  );
+  
 
   const handleSelectBrand = (e, value) => !value ? null : setSelectedBrands(value);
 
@@ -102,9 +89,11 @@ const HomeScreen = () => {
   };
 
   const applyFirters = () => {
+    
     let updatedList = products;
+   
 
-    // Breand Filter
+    // Brand Filter
     if (selectedBrands) {
       updatedList = updatedList.filter((item) => item.brand === selectedBrands);
     }
@@ -117,35 +106,50 @@ const HomeScreen = () => {
           -1
       );
     }
+
      // Categories Filter
      const categoriesChecked = categories
      .filter((item) => item.checked)
-     .map((item) => item.label.toLowerCase());
+     .map((item) => item.label);
+     console.log(categoriesChecked)
 
    if (categoriesChecked.length) {
      updatedList = updatedList.filter((item) =>
        categoriesChecked.includes(item.category)
      );
+     console.log(updatedList)
    }
+    setListProducts(updatedList);
+    //dispatch({type: "FETCH_SUCCESS", payload: updatedList})
 
-    // Price Filter
-    const minPrice = selectedPrice[0];
-    const maxPrice = selectedPrice[1];
-
-    updatedList = updatedList.filter(
-      (item) => item.price >= minPrice && item.price <= maxPrice
-    );
-
-    setList(updatedList);
-
-    !updatedList.length ? setResultsFound(false) : setResultsFound(true);
+    updatedList.length ? setResultsFound(true) : setResultsFound(false);
   };
 
-  useEffect(() => {
-    applyFirters();
-  }, [selectedBrands, searchInput, selectedPrice, categories]);
+  console.log(listProducts)
 
-  console.log(searchInput);
+  const productElements = useMemo(
+    () =>
+   !resultsFound ? products.map((product) => (
+        <Product
+          key={product.slug}
+          product={product}
+          slug={slug}
+          setSlug={setSlug}
+          modalHandler={modalHandler}
+        ></Product>
+      )): listProducts.map((product) => (
+        <Product
+          key={product.slug}
+          product={product}
+          slug={slug}
+          setSlug={setSlug}
+          modalHandler={modalHandler}
+        ></Product>
+      )),
+    [products, slug, setSlug, modalHandler]
+  );
+
+  
   return (
     <div className="home_container">
       <Helmet>
