@@ -1,19 +1,6 @@
 
 
-ul {
-  list-style: none;
-}
 
-a {
-  text-decoration: none;
-}
-.bd-grid {
-  max-width: 1024px;
-  display: grid;
-  grid-template-columns: 100%;
-  margin-left: 1.5rem;
-  margin-right: 1.5rem;
-}
 
 /*=======HEAD======*/
 
@@ -43,16 +30,6 @@ a {
 
 
 /*=== Dropdown ===*/
-
-
-.dropdown__icon {
-  font-size: 1.3rem;
-  transition: .5s;
-}
-
-.dropdown__menu {
-  margin: 1rem 0 0 1rem;
-}
 
 
 

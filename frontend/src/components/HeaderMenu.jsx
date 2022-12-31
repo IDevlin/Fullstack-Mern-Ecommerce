@@ -6,13 +6,15 @@ import { useState, useContext, useRef, useEffect } from 'react';
 
 const HeaderMenu = () => {
   const nav = useRef(null);
+  const dropdown = useRef(null)
   const [sideMenu, setSideMenu] = useState(false);
 
   const dropdownMenu = () => {
-    const dropdown = document.querySelector('.dropdown__menu');
     const dropdownIcon = document.querySelector('.dropdown__icon');
-    dropdown.classList.toggle('hide');
+    dropdown.current.classList.toggle('hide');
     dropdownIcon.classList.toggle('icon_rotate');
+    const site = document.querySelector('#main')
+    site.addEventListener('click', ()=> dropdown.current.classList.contains('hide') && dropdown.current.classList.remove('hide'))
   };
 
   /*window.addEventListener('scroll', () => {
@@ -44,6 +46,7 @@ const HeaderMenu = () => {
   };
 
   return (
+
     <header className="header_menu">
       <Link to="/">
         <img className="image" src={logo} alt="logo" />
@@ -59,23 +62,14 @@ const HeaderMenu = () => {
           className="bx bx-x header__toggle"
           onClick={() => mobileToggle()}
         ></i>
-      )}{' '}
+      )}
       <nav className="nav" id="nav-menu" ref={nav}>
-        <div className="nav__content bd-grid">
+        <div className="nav__content">
           <div className="nav__img">
             <img className="image" src="./images/logo.png" />
           </div>
           <div className="nav__menu">
             <ul className="nav__list">
-              {/*<div className="search-box">
-                <i className="fa fa-search" type="submit"></i>
-                <input
-                  className="form_control "
-                  type="text"
-                  placeholder="Search "
-                />
-                <span>All Category</span>
-  </div>*/}
               <li className="nav__item">
                 <NavLink to="/cart" onClick={() => mobileToggle()}>
                   <span>
@@ -96,7 +90,7 @@ const HeaderMenu = () => {
               
                 <ul
                   className="nav__item dropdown "
-                  onClick={() => dropdownMenu()}
+                  onClick={(e) => dropdownMenu(e)}
                 >
                   {userInfo.isAdmin ? (
                     <li className="nav__item dropdown ">
@@ -112,7 +106,7 @@ const HeaderMenu = () => {
                     </span>
                   )}
 
-                  <ul className="dropdown__menu ">
+                  <ul className="dropdown__menu " ref={dropdown}>
                     {userInfo.isAdmin && (
                       <li className="dropdown__item">
                         <Link
@@ -160,71 +154,7 @@ const HeaderMenu = () => {
         </div>
       </nav>
     </header>
-    /*
-      <div className="search-box">
-        <i className="fa fa-search" type="submit"></i>
-        <input className="form_control " type="text" placeholder="Search " />
-        <span>All Category</span>
-      </div>
-      <div className="heading-rigth">
-        <div className="cart">
-          <Link to="/cart" style={{ color: 'black' }}>
-            Cart <i className="fa fa-shopping-bag icon_circle"></i>
-            {cart.cartItems.length > 0 && (
-              <Badge pill bg="danger">
-                {cart.cartItems.reduce((acc, curr) => acc + curr.quantity, 0)}
-              </Badge>
-            )}
-          </Link>
-        </div>
-        <button className="toggle" onClick={() => setMobileMenu(!mobileMenu)}>
-          {mobileMenu ? (
-            <i className="fas fa-times close home-btn"></i>
-          ) : (
-            <i className="fa-solid fa-bars open"></i>
-          )}{' '}
-        </button>
-
-        {userInfo ? (
-          <>
-            <div className="menu">
-              <h5
-                className="menu-trigger"
-                onClick={() => {
-                  setOpen(!open);
-                }}
-              >
-                {userInfo.name} <i className="fa-solid fa-caret-down"></i>{' '}
-              </h5>{' '}
-            </div>
-
-            <div
-              className={mobileMenu ? 'box-menu' : 'desactive'}
-              ref={menuRef}
-            >
-              <div className={`dropdown_menu ${open ? 'active' : 'inactive'}`}>
-                <ul className="dropdownItem">
-                  <li>
-                    <Link to="/profile">User Profile</Link>
-                  </li>
-                  <li className="dropdownItem">
-                    <Link to="/orderhistory">Order History</Link>
-                  </li>
-                  <li className="dropdownItem">
-                    <Link to="#signout" onClick={signoutHandler}>
-                      Sign Out
-                    </Link>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </>
-        ) : (
-          <Link className="nav-link" to="/signin">
-            Sign In
-          </Link>
-        )}
-      </div>*/
+  
   );
 };
 

@@ -2,36 +2,41 @@ $button-white: rgb(213, 214, 216);
 
 
 .filter-panel{
-h5{
-    margin-top: 1em;
-}
-.button-group{
-    gap: 5px;
-    button{   
-        background: $button-white;
-        min-width: 4em;
-        padding: 4px 1px;       
-    }
-}
-.checkbox{
-    max-width: 17em;
-    gap: 5em;
+   .category-title{
+    cursor: pointer;
+    width: 8em;
+   }
+        h5{
+          
+            margin-top: 1em;
+        }
     
+.checkbox{
+    min-width: 8em;
+    gap: 5em; 
     label{
         text-align: center;
         position: relative;
-    }
+    } 
+}
 }
 
-}
-
-.checkbox-group{
-    max-width: 17em;
+.checkbox-group{ 
+    position:absolute;
+    padding: 1em;
+    background: rgb(230, 232, 237);
+    width: 12em;
     justify-items: start;
+    border-radius: 3px;  
     .form-check-reverse {
         padding-right: 1.5em;
         padding-left: 0;
         text-align: left;
-    }
+    }   
 }
+.hide-checkbox{
+    display: none;
+}
+
+
 

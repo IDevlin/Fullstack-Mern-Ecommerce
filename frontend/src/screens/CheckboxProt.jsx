@@ -1,6 +1,6 @@
 import Form from 'react-bootstrap/Form';
 
-const CheckboxProt = ({key, category, handleChecked}) => {
+const CheckboxProt = ({ category, handleChecked}) => {
     const {id} = category
   return (
     <div className='checkbox'>

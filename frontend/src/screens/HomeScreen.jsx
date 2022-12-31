@@ -1,4 +1,3 @@
-//import React, { useState } from 'react';
 import {
   useReducer,
   useEffect,
@@ -17,6 +16,7 @@ import MessageBox from "../components/MessageBox";
 import SearchBar from "./SearchBar";
 import FilterPanel from "./FilterPanel";
 import { categoriesList } from "./list";
+import { useRef } from "react";
 const ProductScreenLazy = lazy(() => import("./ProductScreen"));
 
 const reducer = (state, { type, payload }) => {
@@ -37,7 +37,6 @@ const HomeScreen = () => {
   const [slug, setSlug] = useState("");
   const [searchInput, setSearchInput] = useState("");
   const [selectedBrands, setSelectedBrands] = useState(null);
-  const [selectedPrice, setSelectedPrice] = useState([5, 100]);
   const [resultsFound, setResultsFound] = useState(true);
   const [categories, setCategories] = useState(categoriesList);
  
@@ -62,8 +61,8 @@ const HomeScreen = () => {
     };
     
     fetchData();
-    applyFirters();
-  }, [selectedBrands, searchInput, selectedPrice, categories]);
+    applyFilters();
+  }, [selectedBrands, searchInput, categories]);
 
   const modalHandler = useCallback(
     (product) => {
@@ -74,12 +73,6 @@ const HomeScreen = () => {
     [modal, products]
   );
 
-  
-
-  const handleSelectBrand = (e, value) => !value ? null : setSelectedBrands(value);
-
-  const handleChangePrice = (e, value) => setSelectedPrice(value);
-
   const handleCategoryChecked = (id) => {
     const categoryStateList = categories;
     const changeCheckedCategories = categoryStateList.map((item) =>
@@ -88,15 +81,8 @@ const HomeScreen = () => {
     setCategories(changeCheckedCategories);
   };
 
-  const applyFirters = () => {
-    
+  const applyFilters = () => {
     let updatedList = products;
-   
-
-    // Brand Filter
-    if (selectedBrands) {
-      updatedList = updatedList.filter((item) => item.brand === selectedBrands);
-    }
 
     // Search Filter
     if (searchInput) {
@@ -120,12 +106,9 @@ const HomeScreen = () => {
      console.log(updatedList)
    }
     setListProducts(updatedList);
-    //dispatch({type: "FETCH_SUCCESS", payload: updatedList})
 
     updatedList.length ? setResultsFound(true) : setResultsFound(false);
   };
-
-  console.log(listProducts)
 
   const productElements = useMemo(
     () =>
@@ -161,12 +144,8 @@ const HomeScreen = () => {
       />
       <section className="hero-section">
         <FilterPanel
-          handleBrands={handleSelectBrand}
-          selectedPrice={selectedPrice}
-          handlePrice={handleChangePrice}
           categories={categories}
           handleChecked={handleCategoryChecked}
-          selectedBrands={selectedBrands}
         />
         <div className="products">
           {loading ? (
@@ -176,6 +155,9 @@ const HomeScreen = () => {
           ) : (
             productElements
           )}
+        </div>
+
+        <div><h1>Salto a pagina</h1>
         </div>
       </section>
       {modal && (

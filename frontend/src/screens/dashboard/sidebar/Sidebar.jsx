@@ -20,8 +20,7 @@ const Sidebar = () => {
       <div className="sidebar_header">
         <span>Admin Panel</span>
       </div>
-      <ul className="sidebar_list">
-      
+      <ul className="sidebar_list">    
         {routes.map((props, key) => {
           return (
             <li className={activeRoute(props)} key={key}>
