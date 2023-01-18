@@ -1,5 +1,6 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import Footer from '../Footer/Footer';
 import routes from '../views/routes';
 
 const Sidebar = () => {
@@ -10,9 +11,9 @@ const Sidebar = () => {
     setRoute(window.location.pathname);
   }, [location]);
 
-  const activeRoute = (prop) => {
-    console.log(prop)
-    return route.indexOf(prop.path) !== -1? 'active' : '';
+  const activeRoute = (path) => {
+    console.log(path)
+    return route.indexOf(path) !== -1? 'active' : '';
   };
 
   return (
@@ -21,18 +22,17 @@ const Sidebar = () => {
         <span>Admin Panel</span>
       </div>
       <ul className="sidebar_list">    
-        {routes.map((props, key) => {
+        {routes.map(({path, key, icon, name}) => {
           return (
-            <li className={activeRoute(props)} key={key}>
-              <Link to={props.path}>
-                <i className={props.icon}></i> <span>{props.name}</span>
+            <li className={activeRoute(path)} key={key}>
+              <Link to={path}>
+                <i className={icon}></i> <span>{name}</span>
               </Link>        
             </li>
           );
         })}
-       
       </ul>
-    </div>
+      </div>
   );
 };
 

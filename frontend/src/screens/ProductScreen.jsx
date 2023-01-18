@@ -11,7 +11,7 @@ import Card from 'react-bootstrap/Card';
 import Rating from '../components/Rating';
 import { getError } from '../utils.js';
 import { StoreContext } from '../Store';
-import Modal from '../components/modal/Modal';
+import Modal from 'react-bootstrap/Modal';
 
 
 const reducer = (state, action) => {
@@ -27,10 +27,8 @@ const reducer = (state, action) => {
   }
 };
 
-const ProductScreen = ({slug}) => {
+const ProductScreen = ({slug, show, handleClose}) => {
  const navigate = useNavigate()
- console.log(slug)
-
 
   const [{ loading, error, product }, dispatch] = useReducer(reducer, {
     product: [],
@@ -72,10 +70,15 @@ const ProductScreen = ({slug}) => {
 
   return(
     <>
-    <Modal>
-      <Row>
-        <h1>{product.name}</h1>
-        <Col md={6}>
+    <Modal show={show} onHide={handleClose} size='lg' >
+      <Row style={{ padding: '1em'}} >
+      <Modal.Header closeButton style={{borderBottom: 'none'}}>
+          <Modal.Title >
+          {product.name}
+          </Modal.Title>
+        </Modal.Header>
+     
+        <Col md={6} >
           <img className="img-large" src={product.image} alt={product.name} />
         </Col>
         <Col md={2}>
@@ -92,7 +95,7 @@ const ProductScreen = ({slug}) => {
           </ListGroup>
         </Col>
         <Col md={4}>
-          <Card className="mt-2">
+          <Card className="mt-2" style={{ width: '15rem' }}>
             <Card.Body>
               <ListGroup variant="flush">
                 <ListGroup.Item>
@@ -125,8 +128,10 @@ const ProductScreen = ({slug}) => {
               </ListGroup>
             </Card.Body>
           </Card>
-        </Col>
+        <Button onClick={handleClose} style={{ width: '5em', position: 'relative', top: '9em', right: '-9em' }}>Close</Button>
+        </Col>    
       </Row>
+      
     </Modal>
     </>
   )

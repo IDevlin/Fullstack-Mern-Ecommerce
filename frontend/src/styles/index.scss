@@ -1,7 +1,7 @@
 /* CSS HEX */
 :root {
     --scarlet: #ff2a00ff;
-    $oxford-blue: #002951ff;
+    --oxford-blue: #002951ff;
     --black: #000001ff;
     --prussian-blue: #002f40ff;
     --orange-pantone: #fe5900ff;
@@ -13,7 +13,7 @@
     --speed: 500ms;
     $default-color: #66615B !default;
   }
-  
+
 @import './HeaderMenu.scss';
 @import './HomeScreen.scss';
 @import './PlaceOrder.scss';
@@ -24,3 +24,4 @@
 @import './AdminPanel.scss';
 @import './SearchBar.scss';
 @import './FilterPanel.scss';
+@import './Footer.scss'

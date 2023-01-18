@@ -1,8 +1,10 @@
 .searchBar-wrap {
     display: flex;
     align-items: center;
+    margin: 1em 1em;
     border-bottom: 1px solid rgba(0, 0, 0, 0.26);
     padding: 0.5em 0.5em;
+  
       i{
         color: rgba(0, 0, 0, 0.26);
         margin-right: 2em;
@@ -18,6 +20,19 @@
         color: rgba(0, 0, 0, 0.26);
       }
   }
+
+  .active-search{
+    height: 12vh;
+    margin: 0em 1em ;
+    padding-top: 3em;
+    position: fixed;
+    top: 0;
+    z-index: 1000;
+    width: 100%;
+    background-color: #ffff;
+    box-shadow: -1px 11px 24px -11px rgba(0, 0, 0, 0.5);
+    transition: 1000ms;
+ }
  
   
  

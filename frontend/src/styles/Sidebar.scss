@@ -1,11 +1,7 @@
 
-
-$white-color:                #FFFFFF !default;
 $oxford-blue: #002951ff;
-$sidebar-width:              calc(100% - 260px) !default;
+
 $orange-pantone: #fe5900ff;
-
-
 
 .sidebar_wrapper{
     background: $oxford-blue;
@@ -26,7 +22,6 @@ $orange-pantone: #fe5900ff;
         color: $orange-pantone;
         font-size:20px;
         span{
-
             &::after{
                 position: absolute;
                 content: '';    
@@ -34,8 +29,7 @@ $orange-pantone: #fe5900ff;
                 right: 0;
                 border-top:20px solid rgb(177, 35, 35, 0);
                 border-bottom: 20px solid rgba(229, 16, 16, 0);
-                border-right: 20px solid rgb(252, 252, 252);
-              
+                border-right: 20px solid rgb(252, 252, 252);          
             }
         }
     }
@@ -50,7 +44,6 @@ $orange-pantone: #fe5900ff;
     .sidebar_wrapper{
         display: flex;
         flex-direction: column;
-        width: 12.5em;
         position:fixed;
         z-index: 1;
         font-weight: 500;
@@ -63,7 +56,7 @@ $orange-pantone: #fe5900ff;
           border-bottom: 2px solid ;
         }     
         .sidebar_list li{
-           margin-bottom: 5em;
+           margin-bottom: 4em;
         }
             
     }
@@ -75,8 +68,7 @@ $orange-pantone: #fe5900ff;
       }      
        .sidebar_list{
         left: -100px;
-        margin-bottom: 1em;
-        
+        margin-bottom: 1em;     
      }
 }
 

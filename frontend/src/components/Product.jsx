@@ -42,10 +42,8 @@ const Product = ({product, slug, setSlug, modalHandler}) => {
         <p>
           <strong>Precio: ${product.price}</strong>
         </p>
-       {product.countInStock == 0 ? <Button variant='light' disabled>Sin Stock</Button>:<Button onClick={()=> addToCartHandler(product)}>Agregar al Carrito</Button> } 
-      
+       {product.countInStock == 0 ? <Button variant='light' disabled>Sin Stock</Button>:<Button onClick={()=> addToCartHandler(product)}>Add To Cart</Button> }      
       </div>
-  
     </div>
   );
 };

@@ -127,9 +127,6 @@ function App() {
             <Route path="/" element={<HomeScreen />} />
           </Routes>
         </main>
-        <footer>
-          <div className="text-center">Todos los derechos reservados</div>
-        </footer>
       </div>
     </BrowserRouter>
   );

@@ -1,66 +1,64 @@
-/*!
 
-=========================================================
-* Paper Dashboard React - v1.3.1
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/paper-dashboard-react
-* Copyright 2022 Creative Tim (https://www.creative-tim.com)
-
-* Licensed under MIT (https://github.com/creativetimofficial/paper-dashboard-react/blob/main/LICENSE.md)
-
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
-/*eslint-disable*/
 import React from "react";
-import { Container, Row } from "reactstrap";
-// used for making the prop types of this component
+import logo from '/images/logo.png'
 import PropTypes from "prop-types";
 
-function Footer(props) {
+const Footer = () => {
   return (
-    <footer className={"footer" + (props.default ? " footer-default" : "")}>
-      <Container fluid={props.fluid ? true : false}>
-        <Row>
-          <nav className="footer-nav">
-            <ul>
-              <li>
-                <a href="https://www.creative-tim.com" target="_blank">
-                  Creative Tim
-                </a>
-              </li>
-              <li>
-                <a href="https://blog.creative-tim.com" target="_blank">
-                  Blog
-                </a>
-              </li>
-              <li>
-                <a href="https://www.creative-tim.com/license" target="_blank">
-                  Licenses
-                </a>
-              </li>
-            </ul>
-          </nav>
-          <div className="credits ml-auto">
-            <div className="copyright">
-              &copy; {1900 + new Date().getYear()}, made with{" "}
-              <i className="fa fa-heart heart" /> by Creative Tim
-            </div>
+    <>
+      <footer>
+        <div className='container grid2'>
+          <div >
+          <div className="logo width">
+            <img src={logo} alt="" />
           </div>
-        </Row>
-      </Container>
-    </footer>
-  );
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Auctor libero id et, in gravida. Sit diam duis mauris nulla cursus. Erat et lectus vel ut sollicitudin elit at amet.</p>
+         
+            <div className='icon d_flex'>
+              <div className='img'>
+                <i className='fa-brands fa-google-play'></i>
+                <span>Google Play</span>
+              </div>
+              <div className='img '>
+                <i className='fa-brands fa-app-store-ios'></i>
+                <span>App Store</span>
+              </div>
+            </div>
+           
+          </div>
+
+          <div className='box'>
+            <h2>About Us</h2>
+            <ul>
+              <li>Careers</li>
+              <li>Our Stores</li>
+              <li>Our Cares</li>
+              <li>Terms & Conditions</li>
+              <li>Privacy Policy</li>
+            </ul>
+          </div>
+          <div className='box'>
+            <h2>Customer Care</h2>
+            <ul>
+              <li>Help Center </li>
+              <li>How to Buy </li>
+              <li>Track Your Order </li>
+              <li>Corporate & Bulk Purchasing </li>
+              <li>Returns & Refunds </li>
+            </ul>
+          </div>
+          <div className='box'>
+            <h2>Contact Us</h2>
+            <ul>
+              <li>1254 ipsum dolor sit amet consectetur adipisicing elit.  </li>
+              <li>Email: uilib.help@gmail.com</li>
+              <li>Phone: +1 1123 456 780</li>
+            </ul>
+          </div>
+        </div>
+      </footer>
+    </>
+  )
 }
 
-Footer.propTypes = {
-  default: PropTypes.bool,
-  fluid: PropTypes.bool
-};
-
-export default Footer;
+export default Footer

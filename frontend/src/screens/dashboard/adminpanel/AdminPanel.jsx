@@ -14,6 +14,7 @@ const AdminPanel = () => {
       <div id='outlet' >
       <Outlet/>
       </div>
+     
     </div>
   );
 };

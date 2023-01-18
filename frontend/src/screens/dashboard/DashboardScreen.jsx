@@ -49,6 +49,7 @@ export default function DashboardScreen() {
     };
     fetchData();
   }, [userInfo]);
+  console.log(summary)
 
   return (
     <div>
@@ -93,7 +94,7 @@ export default function DashboardScreen() {
                       ? summary.orders[0].totalSales.toFixed(2)
                       : 0}
                   </Card.Title>
-                  <Card.Text> Orders</Card.Text>
+                  <Card.Text> Sales</Card.Text>
                 </Card.Body>
               </Card>
             </Col>
